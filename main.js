@@ -97,9 +97,9 @@ const resetBtn = document.querySelector(".reset");
 var startTime;
 var elapsedTime = 0;
 var timerId;
-var timeToadd;
+var timeToadd = 0;
 
-function updateTimeText(){
+function updateTimeText() {
     var m = Math.floor(elapsedTime / 60000);
     var s = Math.floor((elapsedTime % 60000)/ 1000);
     var ms = elapsedTime / 1000;
@@ -111,7 +111,7 @@ function updateTimeText(){
     timeCount.textContent = m + ":" + s + ":" + ms;
 }
 
-function countUp(){
+function countUp() {
     timerId = setTimeout(function(){
         
         elapsedTime = Date.now() - startTime + timeToadd;
@@ -122,7 +122,7 @@ function countUp(){
 },10);
 }
 
-function startTimer(){
+function startTimer() {
     startTime = Date.now();
     countUp();
     startBtn.setAttribute("disabled" , true);
@@ -131,15 +131,15 @@ function startTimer(){
     
 }
 
-function stopTimer(){
-    setInterval(timerId);
+function stopTimer() {
+    clearInterval(timerId);
     timeToadd += Date.now() - startTime;
     stopBtn.setAttribute("disabled", true);
-    startBtn.setAttribute("disabled");
+    startBtn.removeAttribute("disabled");
     
 }
 
-function resetTimer(){
+function resetTimer() {
     clearInterval(timerId);
     elapsedTime = 0;
     timeToadd = 0;
